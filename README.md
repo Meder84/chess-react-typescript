@@ -1,1 +1,1 @@
-# project-typscript
+# chess-react-typscript

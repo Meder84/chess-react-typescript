@@ -13,5 +13,5 @@ const App = () => {
 
 export default App;
 
-// 8:41
+// 13:00
 // Шахматы на React и TypeScript С НУЛЯ. Практикуем ООП

@@ -1,13 +1,22 @@
 import { Cell } from "./Cell";
+import { Colors } from "./Colors";
 
 export class Board {
   cells: Cell[][] = [] // ячейки предсталяет двумерный массив. Строки и столбцы.
   // Строка двумерный массив. Таблица одномерный. По сути матрица.
   // По умолчанию проинициализируем эту переменную. Это, поле свойства класса с пустым массивом.
 
-  public initCells( ) {
-    for (let i = 0; i < 8; i++) {
-
+  public initCells() { // публичный метод
+    for (let i = 0; i < 8; i++) { // проход по строкам
+      const row: Cell[] = [] // одномерный массив ячеек.
+      for (let j = 0; j < 8; j++) { // проход по столбцам
+        if ((i + j) % 2 !== 0) {
+          row.push(new Cell(this, j, i, Colors.BLACK, null)) // черные ячейки
+        } else {
+          row.push(new Cell(this, j, i, Colors.WHITE, null)) // белые ячейки
+        }
+      }
+      this.cells.push(row); // сформированную строку добавляем в двумерный массив cells.
     }
   }
 }

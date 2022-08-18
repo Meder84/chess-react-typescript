@@ -12,6 +12,7 @@ export class Board {
       for (let j = 0; j < 8; j++) { // проход по столбцам
         if ((i + j) % 2 !== 0) {
           row.push(new Cell(this, j, i, Colors.BLACK, null)) // черные ячейки
+          // this текущий obj т.е. доска. j - x, i -y, null поумолчанию безфигур.
         } else {
           row.push(new Cell(this, j, i, Colors.WHITE, null)) // белые ячейки
         }

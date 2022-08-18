@@ -1,5 +1,6 @@
-import { Board } from "./Borad";
+import { Board } from "./Board";
 import { Colors } from "./Colors";
+import { Figure } from "./figures/Figure";
 
 export class Cell {
   readonly x: number;
@@ -9,4 +10,14 @@ export class Cell {
   board: Board;
   available: boolean; // Можешь ли переместиться
   id: number; // Для реакт ключей
+
+  constructor(board: Board, x: number, y: number, color: Colors, figure: Figure | null) {
+    this.x =- x;
+    this.y = y;
+    this.board = board;
+    this.color = color;
+    this.figure = figure;
+    this.available = false;
+    this.id = Math.random();
+  }
 }

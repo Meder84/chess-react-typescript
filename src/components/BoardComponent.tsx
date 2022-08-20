@@ -17,8 +17,9 @@ const BoardComponent: FC<BoardProps> = ({ // FC - FunctionComponent в каче�
 
   return(
     <div className='board'>
-      {board.cells.map((row, index) => 
-        <React.Fragment key={index}>
+      {board.cells.map((row, index) => // с помощью map по двумернему массиву проходимся. Поскольку массив двумерный
+      // каждым элементом является массива, другой массив. Это уже непосредственно массив ячеек.
+        <React.Fragment key={index}> {//почему fragment - Потому что, нет нобходимости обернуть в блок}
           {row.map(cell => 
             <CellComponent 
               click={click}

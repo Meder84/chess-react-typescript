@@ -35,4 +35,3 @@ const BoardComponent: FC<BoardProps> = ({ // FC - FunctionComponent в каче�
 
 export default BoardComponent;
 
-//test

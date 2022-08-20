@@ -18,7 +18,10 @@ const App = () => {
 
   return (
     <div className='app'>
-      <BoardComponent/>
+      <BoardComponent
+        board={board} // сама доска
+        setBoard={setBoard} // функция которая эту доску состояние этой доской может изменить
+      />
     </div>
   );
 };

@@ -19,3 +19,5 @@ export class Figure {
     this.id = Math.random();
   }
 }
+
+// Здесь тоже сделаем кольцевая зависимость

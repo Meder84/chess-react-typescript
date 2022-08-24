@@ -20,4 +20,16 @@ export class Board {
       this.cells.push(row); // сформированную строку добавляем в двумерный массив cells.
     }
   }
+
+  public getCell(x: number, y: number) { // чтобы точечно поставлять фигуры (x, y - координаты)
+    return this.cells[x][y] // Вернем соответствуйщий элемент из двумерного массива cells
+  }
+  public addFigures() {
+    this.addPawns()
+    this.addKnights()
+    this.addKings()
+    this.addBishops()
+    this.addQueens()
+    this.addRooks()
+  }
 }

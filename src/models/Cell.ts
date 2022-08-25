@@ -1,8 +1,8 @@
-import { Board } from "./Board";
-import { Colors } from "./Colors";
-import { Figure } from "./figures/Figure";
+import Board from "./Board";
+import {Colors} from "./Colors";
+import Figure from "./figures/Figure";
 
-export class Cell {
+export default class Cell {
   readonly x: number;
   readonly y: number;
   readonly color: Colors;

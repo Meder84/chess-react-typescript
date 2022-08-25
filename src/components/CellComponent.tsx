@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import {Cell} from '../models/Cell'
+import Cell from '../models/Cell'
 
 interface CellProps { // Укажем что, на вход ожидаем объект ячейки. Это класс Cell
   cell: Cell;

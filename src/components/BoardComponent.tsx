@@ -1,7 +1,8 @@
 import React, { FC, useEffect, useState } from 'react';
-import { Board } from '../models/Board';
-import { Player } from '../models/Player';
+import Board from '../models/Board';
+import Player from '../models/Player';
 import CellComponent from './CellComponent';
+import Cell from '../models/Cell'
 
 interface BoardProps { // interface - В TypeScript интерфейсы выполняют роль именования этих типов 
   // и являются мощным способом определения контрактов в вашем коде, а также контрактов с кодом вне вашего проекта.
@@ -13,7 +14,7 @@ interface BoardProps { // interface - В TypeScript интерфейсы вып�
 
 const BoardComponent: FC<BoardProps> = ({ board, setBoard, currentPlayer, swapPlayer }) => { // FC - FunctionComponent в качестве пропсов, передаем interface BoardProps
   // деструктурируем interface BoardProps. Достаем саму доску и функцию которую ее может изменить.
-  const [selectedCell, setSelectedCell] = useState<Cell | null>(null);
+  const [selectedCell, setSelectedCell] = useState<Cell | null>(null); // Инициализируем с помощью UseState. 
 
   function click(cell: Cell) {
     if (selectedCell && selectedCell !== cell && selectedCell.figure?.canMove(cell)) {

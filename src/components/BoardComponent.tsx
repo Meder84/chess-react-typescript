@@ -14,10 +14,12 @@ interface BoardProps { // interface - В TypeScript интерфейсы вып�
 
 const BoardComponent: FC<BoardProps> = ({ board, setBoard, currentPlayer, swapPlayer }) => { // FC - FunctionComponent в качестве пропсов, передаем interface BoardProps
   // деструктурируем interface BoardProps. Достаем саму доску и функцию которую ее может изменить.
-  const [selectedCell, setSelectedCell] = useState<Cell | null>(null); // Инициализируем с помощью UseState. 
+  const [selectedCell, setSelectedCell] = useState<Cell | null>(null); // Инициализируем с помощью UseState. Укажем какой тип в этом состоянии будет
+  // Либо ячейка, либо null если не одна ячейка не выбрана. А в сам CellComponent передаем boolean flag котороя будет отвечать, ячейка выбрана или нет.
 
-  function click(cell: Cell) {
-    if (selectedCell && selectedCell !== cell && selectedCell.figure?.canMove(cell)) {
+  function click(cell: Cell) { // Отработает при нажатии на ячейку. Аргументом передаем саму ячейку.
+    // в этой функции меняем состояние с помощью setSelectedCell аргументом передаем выбранную ячейку.
+    if (selectedCell && selectedCell !== cell && selectedCell.figure?.canMove(cell)) { 
       selectedCell.moveFigure(cell);
       swapPlayer()
       setSelectedCell(null);
@@ -33,14 +35,17 @@ const BoardComponent: FC<BoardProps> = ({ board, setBoard, currentPlayer, swapPl
     highlightCells()
   }, [selectedCell])
 
-  function highlightCells() {
-    board.highlightCells(selectedCell)
+  function highlightCells() { // подсвечивает ячейки которые доступны. 
+    board.highlightCells(selectedCell) // Вызываем у класса Board метод highlightCells. Но изменение каких-то данных 
+    // внутри объекта Board привести за собой перерендеринг компонента не будет. Для этого необходимо явно обновить состояние.
+   // Для этого создаем отдельную функцию. updateBoard()
     updateBoard()
   }
 
-  function updateBoard() {
-    const newBoard = board.getCopyBoard()
-    setBoard(newBoard);
+  function updateBoard() { // Для обновления состояния класса Board
+    const newBoard = board.getCopyBoard() // Создаем новый объект (доску), копю существующего. Для того что была новая ссылка.
+    // Чтобы при изменении состояние react перерисовал всю доску. После получения нового объекта
+    setBoard(newBoard); // Вызываем для изменения состояния
   }
 
   return(
@@ -52,10 +57,13 @@ const BoardComponent: FC<BoardProps> = ({ board, setBoard, currentPlayer, swapPl
           <React.Fragment key={index}> {/*почему fragment - Потому что, нет нобходимости обернуть в блок. key=index - строки статичны, они не меняются*/}
             {row.map(cell => // итерируем строки для каждого элемента, отрисовываем компонент ячейки.
               <CellComponent 
-                click={click}
+                click={click} // функцию click передаем в сам компонент ячейки. А в самом компоненте пропсом указать, что эту функцию ожидаем.
                 cell={cell}
                 key={cell.id}
-                selected={cell.x === selectedCell?.x && cell.y === selectedCell?.y}
+                selected={cell.x === selectedCell?.x && cell.y === selectedCell?.y} // Если текущая ячейка по координате х и по координате х выбранной ячейки
+                // и так же по y. То будем считать эта ячейка выбрана. То есть координаты совпадают. Как x так и у.
+                // ? - optional оператор - пользовали чтобы при обращении на не существующего поле объекта, приложение не сломолось. 
+                // Т.е. selectedCell?.x тоже самое selectedCell === null || selectedCell === undefined ? undefined : selectedCell.x
               />
             )}
           </React.Fragment>

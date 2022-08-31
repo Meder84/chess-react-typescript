@@ -27,6 +27,16 @@ export default class Board {
     }
   }
 
+  public highlightCells(selectedCell: Cell | null) { // Аргументом передаем выбранную ячейку. Куда фигура может походить.
+    for (let i = 0; i < this.cells.length; i++) { // 
+      const row = this.cells[i];
+      for (let j = 0; j < row.length; j++) {
+        const target = row[j];
+        target.available = !!selectedCell?.figure?.canMove(target)
+      }
+    }
+  }
+
   public getCell(x: number, y: number) { // чтобы точечно поставлять фигуры (x, y - координаты)
     return this.cells[x][y] // Вернем соответствуйщий элемент из двумерного массива cells
   }

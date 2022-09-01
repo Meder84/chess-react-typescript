@@ -28,11 +28,12 @@ export default class Board {
   }
 
   public highlightCells(selectedCell: Cell | null) { // Аргументом передаем выбранную ячейку. Куда фигура может походить.
-    for (let i = 0; i < this.cells.length; i++) { // 
-      const row = this.cells[i];
-      for (let j = 0; j < row.length; j++) {
+    for (let i = 0; i < this.cells.length; i++) { // В цикле пройдем по всем ячейком, т.е. по строкам и по столбцам. Что бы понять на какую ячейку можно ходить.
+      const row = this.cells[i]; // Соответственно это будет двумерный цикл. 
+      for (let j = 0; j < row.length; j++) { // Во внутренним цикле по индексу получаем ячейку. Назавем его target.
         const target = row[j];
-        target.available = !!selectedCell?.figure?.canMove(target)
+        target.available = !!selectedCell?.figure?.canMove(target) // Изменяем значения поле available, чтобы определить доступно ли для хода или нет. 
+        // Для этого получаем фигуру котороя стоить на выбранной ячейке. Вызываем метод canMove(). Этот метод возвращает true если фигура может по ходить либо false если нет. 
       }
     }
   }

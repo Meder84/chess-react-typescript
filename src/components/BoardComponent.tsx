@@ -36,7 +36,7 @@ const BoardComponent: FC<BoardProps> = ({ board, setBoard, currentPlayer, swapPl
   }, [selectedCell])
 
   function highlightCells() { // подсвечивает ячейки которые доступны. 
-    board.highlightCells(selectedCell) // Вызываем у класса Board метод highlightCells. Но изменение каких-то данных 
+    board.highlightCells(selectedCell) // Вызываем у класса Board метод highlightCells, аргументом передаем выбранную ячейку. Но изменение каких-то данных 
     // внутри объекта Board привести за собой перерендеринг компонента не будет. Для этого необходимо явно обновить состояние.
    // Для этого создаем отдельную функцию. updateBoard()
     updateBoard()

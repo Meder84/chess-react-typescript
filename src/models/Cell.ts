@@ -20,4 +20,18 @@ export default class Cell {
     this.available = false;
     this.id = Math.random();
   }
+
+  moveFigure(target: Cell) { // Перемещение фигур. Аргументом принимает target - Это ячейка куда мы хотим переместить.
+    if(this.figure && this.figure?.canMove(target)) { // Если есть фигура на этой ячейке и у этой фигуры метод canMove возвращает true 
+      this.figure.moveFigure(target) // Тогда у фигуры вызываем метод moveFigure()
+      target.figure = this.figure; // фигуру добавили 
+      this.figure = null // фигуру убрали
+      // if (target.figure) {
+      //   console.log(target.figure)
+      //   this.addLostFigure(target.figure);
+      // }
+      // target.setFigure(this.figure)
+      // this.figure = null;
+    }
+  }
 }

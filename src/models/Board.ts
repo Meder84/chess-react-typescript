@@ -27,6 +27,12 @@ export default class Board {
     }
   }
 
+  public getCopyBoard(): Board {
+    const newBoard = new Board(); // новый объект доски. 
+    newBoard.cells = this.cells; // Переносим ячейки текущей доски в новый объект
+    return newBoard;
+  }
+
   public highlightCells(selectedCell: Cell | null) { // Аргументом передаем выбранную ячейку. Куда фигура может походить.
     for (let i = 0; i < this.cells.length; i++) { // В цикле пройдем по всем ячейком, т.е. по строкам и по столбцам. Что бы понять на какую ячейку можно ходить.
       const row = this.cells[i]; // Соответственно это будет двумерный цикл. 
@@ -34,6 +40,8 @@ export default class Board {
         const target = row[j];
         target.available = !!selectedCell?.figure?.canMove(target) // Изменяем значения поле available, чтобы определить доступно ли для хода или нет. 
         // Для этого получаем фигуру котороя стоить на выбранной ячейке. Вызываем метод canMove(). Этот метод возвращает true если фигура может по ходить либо false если нет. 
+        // В качестве ячейки (аргумент) передаем target. !! Это — оператор «логическое НЕ», или оператор логического отрицани
+
       }
     }
   }

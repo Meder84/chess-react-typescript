@@ -19,11 +19,11 @@ const BoardComponent: FC<BoardProps> = ({ board, setBoard, currentPlayer, swapPl
 
   function click(cell: Cell) { // Отработает при нажатии на ячейку. Аргументом передаем саму ячейку.
     // в этой функции меняем состояние с помощью setSelectedCell аргументом передаем выбранную ячейку.
-    if (selectedCell && selectedCell !== cell && selectedCell.figure?.canMove(cell)) { 
-      selectedCell.moveFigure(cell);
+    if (selectedCell && selectedCell !== cell && selectedCell.figure?.canMove(cell)) { // Если ячейка где фигура стоить и не равно куда мы хотим нажать и при этом, метод canMove возвращает true.
+      selectedCell.moveFigure(cell); // Тогда у ячейки вызываем метод moveFigure в качестве turget, передаем саму ячейку.
       swapPlayer()
       setSelectedCell(null);
-      updateBoard()
+      // updateBoard()
     } else {
       if (cell.figure?.color === currentPlayer?.color) {
         setSelectedCell(cell);

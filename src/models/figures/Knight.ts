@@ -12,9 +12,9 @@ export default class Knight extends Figure {
   }
 
   canMove(target: Cell): boolean {
-    if(!super.canMove(target))
-      return false;
-    const dx = Math.abs(this.cell.x - target.x);
+    if(!super.canMove(target)) // Если все условия родительского класса Figure{} не соблюдаются?
+      return false; // Тогда вернем false.
+    const dx = Math.abs(this.cell.x - target.x); // Берем модуль с помошью abs() и отнимаем от текущей позиции отнимаем позицию target.x 
     const dy = Math.abs(this.cell.y - target.y);
 
     return (dx === 1 && dy === 2) || (dx === 2 && dy === 1)

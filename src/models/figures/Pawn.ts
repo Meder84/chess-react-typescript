@@ -6,7 +6,7 @@ import whiteLogo from "../../assets/white-pawn.png";
 
 export default class Pawn extends Figure {
 
-  isFirstStep: boolean = true;
+  isFirstStep: boolean = true; // Первый ход пешки.
 
   constructor(color: Colors, cell: Cell) {
     super(color, cell);
@@ -38,6 +38,6 @@ export default class Pawn extends Figure {
 
   moveFigure(target: Cell) {
     super.moveFigure(target);
-    this.isFirstStep = false;
+    this.isFirstStep = false; // после передвижения пешки, это bolean поле сделаем false.
   }
 }

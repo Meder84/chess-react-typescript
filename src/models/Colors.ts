@@ -1,4 +1,4 @@
-export enum Colors {  // enum примитивный перечисляемый тип
+export enum Colors {
   WHITE= "white",
   BLACK= "black",
 }

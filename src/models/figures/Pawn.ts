@@ -1,12 +1,12 @@
-import Figure, {FigureNames} from "./Figure";
+import {Figure, FigureNames} from "./Figure";
 import {Colors} from "../Colors";
-import Cell from "../Cell";
+import {Cell} from "../Cell";
 import blackLogo from "../../assets/black-pawn.png";
 import whiteLogo from "../../assets/white-pawn.png";
 
-export default class Pawn extends Figure {
+export class Pawn extends Figure {
 
-  isFirstStep: boolean = true; // Первый ход пешки.
+  isFirstStep: boolean = true;
 
   constructor(color: Colors, cell: Cell) {
     super(color, cell);
@@ -38,6 +38,6 @@ export default class Pawn extends Figure {
 
   moveFigure(target: Cell) {
     super.moveFigure(target);
-    this.isFirstStep = false; // после передвижения пешки, это bolean поле сделаем false.
+    this.isFirstStep = false;
   }
 }

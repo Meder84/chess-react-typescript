@@ -1,8 +1,8 @@
-import Board from "./Board";
 import {Colors} from "./Colors";
-import Figure from "./figures/Figure";
+import {Figure} from "./figures/Figure";
+import {Board} from "./Board";
 
-export default class Cell {
+export class Cell {
   readonly x: number;
   readonly y: number;
   readonly color: Colors;
@@ -12,35 +12,42 @@ export default class Cell {
   id: number; // Для реакт ключей
 
   constructor(board: Board, x: number, y: number, color: Colors, figure: Figure | null) {
-    this.x =- x;
+    this.x = x;
     this.y = y;
-    this.board = board;
     this.color = color;
     this.figure = figure;
+    this.board = board;
     this.available = false;
-    this.id = Math.random();
+    this.id = Math.random()
   }
 
-  isEmpty() { // Вернет true если ячейка пустая.
+  isEmpty(): boolean {
     return this.figure === null;
   }
 
-  isEmptyVertical(target: Cell): boolean { // Проверка на пустоту по вертикали. Аргументом принимает target ячейку, куда мы хотим по ходит. Возвращать будет boolean flag, true || false.
-    if (this.x !== target.x) { // Если х координаты текущей ячейки и координаты target ячейки не совпадают. 
-      return false; // Так мы отсеиваем, все столбцы по вертикали, которые не совпадают с тем направлением движение, которые мы хотим. 
+  isEnemy(target: Cell): boolean {
+    if (target.figure) {
+      return this.figure?.color !== target.figure.color;
     }
-
-    const min = Math.min(this.y, target.y); // min координата текущей и target ячеек, с помощью функции min пакета Math 
-    const max = Math.max(this.y, target.y); // max координата текущей и target ячеек.
-    for (let y = min + 1; y < max; y++) { // Проходим в цикле от min +1, до max. +1 - Потому, что min это текущая ячейка.
-      if(!this.board.getCell(this.x, y).isEmpty()) { // Получаем x координату по индексу y. Если ячейка не пустая 
-        return false; // Вернем false.
-      }
-    }
-    return true; // Если все проверки прошли, тогда вернем true
+    return false;
   }
 
-  isEmptyHorizontal(target: Cell): boolean { // Проверка на пустоту по горизонтали. Реализуется так же, как по вертикали. Только координаты меняются местами.
+  isEmptyVertical(target: Cell): boolean {
+    if (this.x !== target.x) {
+      return false;
+    }
+
+    const min = Math.min(this.y, target.y);
+    const max = Math.max(this.y, target.y);
+    for (let y = min + 1; y < max; y++) {
+      if(!this.board.getCell(this.x, y).isEmpty()) {
+        return false
+      }
+    }
+    return true;
+  }
+
+  isEmptyHorizontal(target: Cell): boolean {
     if (this.y !== target.y) {
       return false;
     }
@@ -55,44 +62,42 @@ export default class Cell {
     return true;
   }
 
-  // Разница между диагональными клетками по x и по y всегда равняется. Поэтому с помощью f abs() берем модуль. Модуль важен, поскольку двигаться будем в разных направлениях.
-
   isEmptyDiagonal(target: Cell): boolean {
-    const absX = Math.abs(target.x - this.x); // abs() возвращает модуль числа (абсолютное значение числа). Верхний левый = верхний правый.
-    const absY = Math.abs(target.y - this.y); // Нижний левый = нижний правый.
-    if(absY !== absX) // Если разница модулей не совпадает 
-      return false; // Тогда вернем false. Это уже не диагональ
-    
-    // Проверим эти диагонали на пустоту. Для этого получаем направления по которому двигаемся.
-    // Если координата по y текущей проверки, меньше чем координата точки в которую, мы хотим попасть.
-    const dy = this.y < target.y ? 1 : -1 // то присвоиваем 1цу иначе -1цу
-    const dx = this.x < target.x ? 1 : -1 // так же по х. Затем на это значения будем умножать.
+    const absX = Math.abs(target.x - this.x);
+    const absY = Math.abs(target.y - this.y);
+    if(absY !== absX)
+      return false;
 
-    for (let i = 1; i < absY; i++) { // В цикле двигаемся на столько ячеек, на сколько получили в моудль разницу в самом начале.
-      if(!this.board.getCell(this.x + dx * i, this.y + dy * i).isEmpty()) // Получаем ячейку и по х к текущей координате прибавляем, произведение dx * на индекс.
-      // так мы, получаем направление движение. Если в отрицательную сторону, то индекс умножаем -1цу, получиться (x -индекс) в обротном случае +1цу, (x + индекс).так же по y
+    const dy = this.y < target.y ? 1 : -1
+    const dx = this.x < target.x ? 1 : -1
+
+    for (let i = 1; i < absY; i++) {
+      if(!this.board.getCell(this.x + dx*i, this.y + dy   * i).isEmpty())
         return false;
     }
     return true;
   }
 
-  setFigure(figure: Figure) {// Меняет фигуру в самой ячейке.
-    this.figure = figure; // На текущей ячейке меняем фигуру.
-    this.figure.cell = this; // У ячейки на которую смотрит фигура, тоже меняем на this.
+  setFigure(figure: Figure) {
+    this.figure = figure;
+    this.figure.cell = this;
   }
 
-  // Тут есть колцевая зависимость. Поэтому необходимо, для самой ячейки, тоже фигуру надо поменять. Поэтому реализуем метод setFigure()
-  moveFigure(target: Cell) { // Перемещение фигур. Аргументом принимает target - Это ячейка куда мы хотим переместить.
-    if(this.figure && this.figure?.canMove(target)) { // Если есть фигура на этой ячейке и у этой фигуры метод canMove возвращает true 
-      this.figure.moveFigure(target) // Тогда у фигуры вызываем метод moveFigure()
-      target.setFigure(this.figure); // фигуру добавили 
-      this.figure = null // фигуру убрали
-      // if (target.figure) {
-      //   console.log(target.figure)
-      //   this.addLostFigure(target.figure);
-      // }
-      // target.setFigure(this.figure)
-      // this.figure = null;
+  addLostFigure(figure: Figure) {
+    figure.color === Colors.BLACK
+      ? this.board.lostBlackFigures.push(figure)
+      : this.board.lostWhiteFigures.push(figure)
+  }
+
+  moveFigure(target: Cell) {
+    if(this.figure && this.figure?.canMove(target)) {
+      this.figure.moveFigure(target)
+      if (target.figure) {
+        console.log(target.figure)
+        this.addLostFigure(target.figure);
+      }
+      target.setFigure(this.figure);
+      this.figure = null;
     }
   }
 }

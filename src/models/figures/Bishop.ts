@@ -1,19 +1,20 @@
-import Figure, {FigureNames} from "./Figure";
+import {Figure, FigureNames} from "./Figure";
 import {Colors} from "../Colors";
-import Cell from "../Cell";
+import {Cell} from "../Cell";
 import blackLogo from '../../assets/black-bishop.png'
 import whiteLogo from '../../assets/white-bishop.png'
 
-export default class Bishop extends Figure {
+export class Bishop extends Figure {
+
   constructor(color: Colors, cell: Cell) {
     super(color, cell);
     this.logo = color === Colors.BLACK ? blackLogo : whiteLogo;
-    this.name = FigureNames.BISHOP; // Переопределяем свойства name, родительского класса Figure
+    this.name = FigureNames.BISHOP;
   }
 
   canMove(target: Cell): boolean {
-    if(!super.canMove(target)) // вызываем метод canMove у родительского класса Figure. Если метод вернет false
-      return false; // Тогда вернем false
+    if(!super.canMove(target))
+      return false;
     if(this.cell.isEmptyDiagonal(target))
       return true
     return false

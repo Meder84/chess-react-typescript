@@ -1,7 +1,7 @@
 # project: Chess 
 
 ## Проект: "Movies-explorer"
-* [Ссылка на проект](https://meder84.github.io/chess-react-typscript/)
+* [Ссылка на проект](https://meder84.github.io/chess-react-typescript/)
 * [Ссылка на анимацию](https://github.com/Meder84/Meder84/blob/main/gif/chess.gif)
 
 ### Обзор

@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/chess-react-typscript/static/css/main.1c5682eb.css",
+    "main.js": "/chess-react-typscript/static/js/main.9bf526e2.js",
+    "index.html": "/chess-react-typscript/index.html",
+    "main.1c5682eb.css.map": "/chess-react-typscript/static/css/main.1c5682eb.css.map",
+    "main.9bf526e2.js.map": "/chess-react-typscript/static/js/main.9bf526e2.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1c5682eb.css",
+    "static/js/main.9bf526e2.js"
+  ]
+}

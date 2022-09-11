@@ -1,5 +1,6 @@
 import React, {FC} from 'react';
-import {Cell} from "../models/Cell";
+import {Cell} from "../../models/Cell";
+import './CellComponent.css'
 
 interface CellProps {
   cell: Cell;
@@ -10,7 +11,7 @@ interface CellProps {
 const CellComponent: FC<CellProps> = ({cell, selected, click}) => {
   return (
     <div
-      className={['cell', cell.color, selected ? "selected" : ''].join(' ')}
+      className={['cellComponent', cell.color, selected ? "selected" : ''].join(' ')}
       onClick={() => click(cell)}
       style={{background: cell.available && cell.figure ? 'green' : ''}}
     >

@@ -1,0 +1,21 @@
+.boardComponent {
+  display: flex;
+  flex-direction: column;
+}
+
+.boardComponent__container {
+  width: calc(64px * 8);
+  height: calc(64px * 8);
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+.boardComponent__subTitle {
+  background-color: #bc8b66;
+  color: black;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 20px;
+}
+

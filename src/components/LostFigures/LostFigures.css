@@ -1,0 +1,23 @@
+.lostFigures {
+  display: flex;
+  flex-direction: row;
+  min-height: 32px;
+  padding: 0;
+  margin: 0;
+  background-color: lightgray;
+}
+
+.lostFigures__container {
+  margin: 0 0 0 10px;
+}
+
+.lostFigures__subtitle {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 20px;
+}
+
+.lostFigures__image {
+  width: 18px;
+  height: 18px;
+}

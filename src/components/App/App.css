@@ -4,6 +4,7 @@
 }
 
 .app {
+    font-family: 'Inter', 'Arial', sans-serif;
     width: 100vw;
     height: 100vh;
     display: flex;
@@ -11,12 +12,6 @@
     align-items: center;
 }
 
-.board {
-    width: calc(64px * 8);
-    height: calc(64px * 8);
-    display: flex;
-    flex-wrap: wrap;
-}
 .cell {
     width: 64px;
     height: 64px;
@@ -46,9 +41,3 @@
     background-color: brown;
 }
 
-.lost {
-    height: calc(50vh - 60px);
-    padding: 30px;
-    margin-left: 50px;
-    background-color: lightgray;
-}

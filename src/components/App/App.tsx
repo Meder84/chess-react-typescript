@@ -3,7 +3,6 @@ import BoardComponent from "../BoardComponent/BoardComponent";
 import {Board} from "../../models/Board";
 import {Player} from "../../models/Player";
 import {Colors} from "../../models/Colors";
-import LostFigures from "../LostFigures/LostFigures";
 import Timer from "../Timer/Timer";
 import "./App.css";
 
@@ -30,18 +29,21 @@ const App = () => {
   }
 
   return (
-    <div className="app">
-      <Timer
-        restart={restart}
-        currentPlayer={currentPlayer}
-      />
-      
+    <div className="app">      
       <BoardComponent
         board={board}
         figures={board}
         setBoard={setBoard}
         currentPlayer={currentPlayer}
         swapPlayer={swapPlayer}
+      />
+
+      <Timer
+        restart={restart}
+        currentPlayer={currentPlayer}
+        player1='player 1'
+        buttonRestart='restart game'
+        player2='player 2'
       />
       
     </div>

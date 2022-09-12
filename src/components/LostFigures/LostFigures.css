@@ -2,13 +2,13 @@
   display: flex;
   flex-direction: row;
   min-height: 32px;
-  padding: 0;
+  padding: 5px;
   margin: 0;
   background-color: lightgray;
 }
 
 .lostFigures__container {
-  margin: 0 0 0 10px;
+  margin: 0;
 }
 
 .lostFigures__subtitle {

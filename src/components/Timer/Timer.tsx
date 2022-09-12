@@ -6,9 +6,12 @@ import './Timer.css';
 interface TimerProps {
   currentPlayer: Player | null;
   restart: () => void;
+  buttonRestart: string;
+  player1: string;
+  player2: string;
 }
 
-const Timer: FC<TimerProps> = ({currentPlayer, restart}) => {
+const Timer: FC<TimerProps> = ({currentPlayer, restart, buttonRestart, player1, player2}) => {
   const [blackTime, setBlackTime] = useState(300)
   const [whiteTime, setWhiteTime] = useState(300);
   const timer = useRef<null | ReturnType<typeof setInterval>>(null)
@@ -44,10 +47,10 @@ const Timer: FC<TimerProps> = ({currentPlayer, restart}) => {
         onClick={handleRestart}
         className='timer__button-restart'
       >
-        Restart game
+        {buttonRestart}
       </button>
-      <h2 className='timer__player-name'>Черные - {blackTime}</h2>
-      <h2 className='timer__player-name'>Белые - {whiteTime}</h2>
+      <h2 className='timer__player-name'>{player1} - {blackTime}</h2>
+      <h2 className='timer__player-name'>{player2} - {whiteTime}</h2>
     </div>
   );
 };

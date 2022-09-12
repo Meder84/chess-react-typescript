@@ -30,6 +30,13 @@ const BoardComponent: FC<BoardProps> = ({board, setBoard, figures, currentPlayer
     }
   }
 
+  function cursor(cell: Cell) {
+    if (cell.figure?.color === currentPlayer?.color) {
+      setSelectedCell(cell);
+      updateBoard()
+    }
+  }
+
   useEffect(() => {
     highlightCells()
   }, [selectedCell])
@@ -48,7 +55,7 @@ const BoardComponent: FC<BoardProps> = ({board, setBoard, figures, currentPlayer
     <div className='boardComponent'>
       <h3 className='boardComponent__subTitle'>Текущий игрок {currentPlayer?.color}</h3>
       <LostFigures
-        title="Черные фигуры:"
+        // title="Черные фигуры:"
         figures={figures.lostWhiteFigures}
       />
       <div className="boardComponent__container">
@@ -57,6 +64,7 @@ const BoardComponent: FC<BoardProps> = ({board, setBoard, figures, currentPlayer
             {row.map(cell =>
               <CellComponent
                 click={click}
+                cursor={cursor}
                 cell={cell}
                 key={cell.id}
                 selected={cell.x === selectedCell?.x && cell.y === selectedCell?.y}
@@ -66,7 +74,7 @@ const BoardComponent: FC<BoardProps> = ({board, setBoard, figures, currentPlayer
         )}
       </div>
       <LostFigures
-        title="Белые фигуры:"
+        // title="Белые фигуры:"
         figures={figures.lostBlackFigures}
       />
     </div>

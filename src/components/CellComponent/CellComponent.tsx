@@ -6,13 +6,15 @@ interface CellProps {
   cell: Cell;
   selected: boolean;
   click: (cell: Cell) => void;
+  cursor: (cell: Cell) => void;
 }
 
-const CellComponent: FC<CellProps> = ({cell, selected, click}) => {
+const CellComponent: FC<CellProps> = ({cell, selected, click, cursor}) => {
   return (
     <div
       className={['cellComponent', cell.color, selected ? "selected" : ''].join(' ')}
       onClick={() => click(cell)}
+      onMouseOver={() => cursor(cell)}
       style={{background: cell.available && cell.figure ? 'green' : ''}}
     >
       {cell.available && !cell.figure && <div className={"available"}/>}

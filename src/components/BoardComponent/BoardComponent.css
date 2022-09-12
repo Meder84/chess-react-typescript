@@ -1,6 +1,9 @@
 .boardComponent {
   display: flex;
   flex-direction: column;
+  margin: 0;
+  padding: 0;
+  width: max-content;
 }
 
 .boardComponent__container {
@@ -12,10 +15,14 @@
 }
 
 .boardComponent__subTitle {
-  background-color: #bc8b66;
-  color: black;
   font-size: 18px;
   font-weight: 500;
   line-height: 20px;
+  background-color: brown;
+  border: solid 1px white;
+  color: white;
+  border-radius: 10px;
+  width: max-content;
+  padding: 5px;
+  margin: 0 auto;
 }
-

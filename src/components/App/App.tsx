@@ -4,7 +4,7 @@ import {Board} from "../../models/Board";
 import {Player} from "../../models/Player";
 import {Colors} from "../../models/Colors";
 import LostFigures from "../LostFigures/LostFigures";
-import Timer from "../Timer";
+import Timer from "../Timer/Timer";
 import "./App.css";
 
 const App = () => {
